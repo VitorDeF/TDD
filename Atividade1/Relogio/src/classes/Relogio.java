@@ -7,10 +7,9 @@ public class Relogio {
 	private int hora, min, seg;
 	
 	public Relogio(){
-		horaAtual = LocalTime.now();
-		setHora(horaAtual.getHour());
-		setMin(horaAtual.getMinute());
-		setSeg(horaAtual.getSecond());
+		setHora(0);
+		setMin(0);
+		setSeg(0);
 	}
 	
 	public LocalTime getHoraAtual() {
@@ -44,8 +43,8 @@ public class Relogio {
 		if(00<=min && min<=59)
 			this.min = min;
 		else {
-			setHora(getHora()+(min%60));
-			this.min = min - (min%60)*60;
+			setHora(getHora()+(min/60));
+			this.min = min - (min/60)*60;
 		}
 	}
 
@@ -57,8 +56,8 @@ public class Relogio {
 		if(00<=seg && seg<=59)
 			this.seg = seg;
 		else {
-			setMin(getMin()+(seg%60));
-			this.seg = seg - (seg%60)*60;
+			setMin(getMin()+(seg/60));
+			this.seg = seg - (seg/60)*60;
 		}
 	}
 
@@ -81,7 +80,7 @@ public class Relogio {
 		do {
 			t2 = System.currentTimeMillis();
 		}while((t2-t1)<(seg*1000));
-		setSeg(((int)(t2-t1)/1000));
+		setSeg((int)(t2-t1)/1000);
 		System.out.println(imprimeHora24());
 	}
 
@@ -95,7 +94,8 @@ public class Relogio {
 		else
 			return String.format("%02d:%02d:%02d PM", getHora()-12, getMin(), getSeg());
 	}
-
+	
+	//Faz horário se tornar o da máquina
 	public void transformaHora() {
 		horaAtual = LocalTime.now();
 		setHora(horaAtual.getHour());

@@ -44,8 +44,8 @@ class RelogioTest {
 		r.reiniciaHorario();
 		r.cronometro(1);
 		assertEquals(r.imprimeHora24(), "00:00:01");
-		r.cronometro(60);
-		assertEquals(r.imprimeHora24(), "00:01:01");
+		r.cronometro(65);
+		assertEquals(r.imprimeHora24(), "00:01:05");
 	}
 
 	@Test
