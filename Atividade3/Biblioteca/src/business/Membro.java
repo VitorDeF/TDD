@@ -4,7 +4,7 @@ public class Membro {
 	
 	private final int id;
 	private static int cont = 0;
-	private String[] livrosEmp;
+	private Livro[] livrosEmp = new Livro[10];
 	private String nome;
 	
 	public static int getCont() {
@@ -13,7 +13,7 @@ public class Membro {
 	public int getId() {
 		return id;
 	}
-	public String[] getLivrosEmprestados() {
+	public Livro[] getLivrosEmprestados() {
 		return livrosEmp;
 	}
 	public String getNome() {
@@ -26,5 +26,30 @@ public class Membro {
 		this.id = cont++;
 		this.nome = nome;
 	}
-
+	
+	public void pegaLivroEmp(Livro livro) {
+		int i = 0;
+		do {
+			if(livrosEmp[i]==null)
+				livrosEmp[i] = livro;
+			i++;
+		}while(livrosEmp[i]!=null);
+		livro.emprestaLivro();
+	}
+	
+	public void devolveLivroEmp(Livro livro) {
+		int i = 0;
+		do {
+			if(livrosEmp[i]==livro)
+				livrosEmp[i] = null;
+			i++;
+		}while(livrosEmp[i]!=null);
+		livro.devolveLivro();
+	}
+	
+	public void listaLivrosEmp() {
+		for(Livro L : this.livrosEmp) {
+			System.out.println(L.getTitulo());
+		}
+	}
 }
